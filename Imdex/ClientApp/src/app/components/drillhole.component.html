@@ -1,0 +1,18 @@
+<table class="table" *ngFor="let reading of drillhole.readings">
+  <thead>
+    <tr>
+      <th>Depth</th>
+      <th>Dip</th>
+      <th>Azimuth</th>
+      <th>Trustworthy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{reading.depth}}</td>
+      <td>{{reading.dip}}</td>
+      <td>{{reading.azimuth}}</td>
+      <td>{{reading.trustworthy}}</td>
+    </tr>
+  </tbody>
+</table>
