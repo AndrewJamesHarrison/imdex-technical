@@ -1,2 +1,17 @@
 
-<h1>Imdex</h1>
+<div class="col-md-12">
+  <h1>Imdex</h1>
+
+  <p *ngIf="!drillholes"><em>Loading...</em></p>
+
+  <mat-accordion *ngIf="drillholes">
+    <mat-expansion-panel *ngFor="let hole of drillholes">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-panel-description>Latitude: {{ hole.latitude }}, Longitude:  {{ hole.longitude }}</mat-panel-description>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <drill-hole [drillhole]="hole"></drill-hole>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
