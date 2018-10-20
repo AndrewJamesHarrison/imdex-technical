@@ -1,4 +1,8 @@
-# AngularSpa
+# Imdex Technical Test
+
+This project is an ASP.NetCore application that serves an angular front end.
+
+# Angular 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.0.
 
