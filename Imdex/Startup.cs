@@ -44,16 +44,15 @@ namespace Imdex
             var connectionString = new NpgsqlConnectionStringBuilder(
                 Configuration["CloudSql:ConnectionString"])
                     {
-                        SslMode = SslMode.Require,
+                        SslMode = SslMode.Disable,
                         TrustServerCertificate = true,
                         UseSslStream = true,
                     };
 
             if (string.IsNullOrEmpty(connectionString.Database))
-                connectionString.Database = "Imdex0001";
-
+                connectionString.Database = "postgres";
             connection = new NpgsqlConnection(connectionString.ConnectionString);
-            connection.ProvideClientCertificatesCallback += certs => certs.Add(new X509Certificate2(Configuration["CloudSql:CertificateFile"]));
+            //connection.ProvideClientCertificatesCallback += certs => certs.Add(new X509Certificate2(Configuration["CloudSql:CertificateFile"]));
             return connection;
         }
 

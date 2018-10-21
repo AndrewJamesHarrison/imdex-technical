@@ -24,7 +24,7 @@ namespace Imdex.Repositories
 
         public DepthReading Get(int Id)
         {
-            var result = _connection.QueryFirst<DepthReading>(@"Select * from DepthReading where id=@param1", new { param1 = Id });
+            var result = _connection.QueryFirst<DepthReading>(@"Select * from DepthReading where DepthId=@param1", new { param1 = Id });
             return result;
         }
 
@@ -36,7 +36,7 @@ namespace Imdex.Repositories
 
         public void Update(DepthReading model)
         {
-            _connection.Execute(@"UPDATE DepthReading SET depth = @param2, dip = @param3, azimuth = @param4) WHERE Id = @parameter1)", new { param1 = model.Id, param2 = model.Depth, param3 = model.Dip, param4 = model.Azimuth });
+            _connection.Execute(@"UPDATE DepthReading SET depth = @param2, dip = @param3, azimuth = @param4) WHERE DepthId = @parameter1)", new { param1 = model.DepthId, param2 = model.Depth, param3 = model.Dip, param4 = model.Azimuth });
         }
     }
 }

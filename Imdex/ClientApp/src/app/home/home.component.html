@@ -8,7 +8,7 @@
     <mat-expansion-panel *ngFor="let hole of drillholes">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-panel-description>Latitude: {{ hole.latitude }}, Longitude:  {{ hole.longitude }}</mat-panel-description>
+          <mat-panel-description>Latitude: {{ hole.latitude }}, Longitude:  {{ hole.longitude }}, dip: {{ hole.dip }}, azimuth: {{ hole.azimuth }}</mat-panel-description>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <drill-hole [drillhole]="hole"></drill-hole>
