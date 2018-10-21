@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Imdex.Models
 {
-    public class DepthReading
+    public class DepthReading : Model
     {
         public double Depth { get; set; }
         public double Dip { get; set; }

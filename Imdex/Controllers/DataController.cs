@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Imdex.Models;
+using Imdex.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Imdex.Controllers
@@ -10,28 +11,19 @@ namespace Imdex.Controllers
     [Route("api/[controller]")]
     public class DataController : Controller
     {
+        private readonly IDepthReadingRepository _depthReadingRepository;
+        private readonly IDrillHoleRepository _drillHoleRepository;
+
+        public DataController(IDrillHoleRepository drillHoleRepository, IDepthReadingRepository depthReadingRepository)
+        {
+            _depthReadingRepository = depthReadingRepository;
+            _drillHoleRepository = drillHoleRepository;
+        }
+
         [HttpGet("sample")]
         public List<DrillHole> getSampleData()
         {
-            var drillholes = new List<DrillHole>()
-            {
-                new DrillHole()
-                {
-                    Azimuth = 2,
-                    Dip = 1.5,
-                    Latitude = 65.5,
-                    Longitude = 125.0,
-                    Readings = new List<DepthReading>()
-                    {
-                        new DepthReading()
-                        {
-                            Azimuth = 1.5,
-                            Dip = 0.7,
-                            Depth = 100,
-                        }
-                    }
-                }
-            };
+            var drillholes = _drillHoleRepository.GetAll();
             return drillholes;
         }
     }

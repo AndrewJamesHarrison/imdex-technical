@@ -6,8 +6,4 @@ import { Component, Input} from '@angular/core';
 })
 export class DrillHoleComponent {
   @Input() drillhole: DrillHole;
-
-  constructor(){
-    console.log(this.drillhole);
-  }
 }

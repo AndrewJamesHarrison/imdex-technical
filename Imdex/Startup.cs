@@ -1,3 +1,5 @@
+using Imdex.Models;
+using Imdex.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -5,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
+using System.Data.Common;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Imdex
 {
@@ -27,6 +32,29 @@ namespace Imdex
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddSingleton(typeof(DbConnection), (IServiceProvider) => InitializeDatabase());
+            services.AddSingleton<IDepthReadingRepository, DepthReadingRepository>();
+            services.AddSingleton<IDrillHoleRepository, DrillHoleRepository>();
+        }
+
+        DbConnection InitializeDatabase()
+        {
+            NpgsqlConnection connection;
+            var connectionString = new NpgsqlConnectionStringBuilder(
+                Configuration["CloudSql:ConnectionString"])
+                    {
+                        SslMode = SslMode.Require,
+                        TrustServerCertificate = true,
+                        UseSslStream = true,
+                    };
+
+            if (string.IsNullOrEmpty(connectionString.Database))
+                connectionString.Database = "Imdex0001";
+
+            connection = new NpgsqlConnection(connectionString.ConnectionString);
+            connection.ProvideClientCertificatesCallback += certs => certs.Add(new X509Certificate2(Configuration["CloudSql:CertificateFile"]));
+            return connection;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

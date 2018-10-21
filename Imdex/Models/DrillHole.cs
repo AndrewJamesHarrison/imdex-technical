@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Imdex.Models
 {
-    public class DrillHole
+    public class DrillHole : Model
     {
         public double Latitude { get; set;}
         public double Longitude { get; set; }
