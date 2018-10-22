@@ -44,7 +44,7 @@ namespace Imdex
             var connectionString = new NpgsqlConnectionStringBuilder(
                 Configuration["CloudSql:ConnectionString"])
                     {
-                        SslMode = SslMode.Disable,
+                        SslMode = SslMode.Require,
                         TrustServerCertificate = true,
                         UseSslStream = true,
                     };
